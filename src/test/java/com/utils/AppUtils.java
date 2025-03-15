@@ -196,4 +196,24 @@ public final class AppUtils {
                 .post("session/" + sessionId + "/appium/device/push_file");
     }
 
+    public static void executeScript(String sessionId, String jsScript) {
+        PreemptiveBasicAuthScheme authenticationScheme = new PreemptiveBasicAuthScheme();
+        authenticationScheme.setUserName(USERNAME);
+        authenticationScheme.setPassword(ACCESS_KEY);
+        requestSpecification = new RequestSpecBuilder()
+                .setBaseUri("https://hub.browserstack.com")
+                .setBasePath("wd/hub")
+                .setAuth(authenticationScheme)
+                .addFilter(new RequestLoggingFilter())
+                .addFilter(new ResponseLoggingFilter())
+                .build();
+        responseSpecification = new ResponseSpecBuilder()
+                .expectStatusCode(200)
+                .build();
+        given()
+                .header("Content-Type", "application/json")
+                .body("{\"script\": \"" + jsScript + "\", \"args\": []}")
+                .post("session/" + sessionId + "/execute/sync");
+    }
+
 }
