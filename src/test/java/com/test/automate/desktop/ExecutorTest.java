@@ -1,5 +1,6 @@
 package com.test.automate.desktop;
 
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.Test;
 
 import com.test.base.WebBaseTest;
@@ -10,7 +11,7 @@ public class ExecutorTest extends WebBaseTest {
     @Test
     public void executorTest() {
         driver.get("https://www.browserstack.com/");
-        String sessionId = driver.getSessionId().toString();
+        String sessionId = ((RemoteWebDriver) driver).getSessionId().toString();
         AppUtils.executeScript(sessionId, "window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })");
     }
 

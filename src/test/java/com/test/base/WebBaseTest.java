@@ -11,7 +11,7 @@ import java.net.URL;
 
 public class WebBaseTest {
 
-    protected RemoteWebDriver driver;
+    protected WebDriver driver;
 
     @BeforeMethod(alwaysRun = true)
     public void setup() throws MalformedURLException {
